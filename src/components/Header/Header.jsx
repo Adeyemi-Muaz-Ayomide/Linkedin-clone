@@ -10,7 +10,7 @@ const Header = () => {
   const avatar = "https://i.pravatar.cc/48?u=118836";
   return (
     // Header section
-    <header className="flex justify-evenly sticky top-0 py-3 w-full z-[999] border-b-[0.1px] border-solid">
+    <header className="flex justify-evenly sticky top-0 py-3 w-full z-[999] border-b-[0.1px] border-solid bg-white">
       {/* Left header section */}
       <div className="flex">
         <img
