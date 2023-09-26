@@ -9,7 +9,8 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/index.html",
+        "main": "./dist/firebase.js"
       }
     ],
     "predeploy": ["npm run build"]

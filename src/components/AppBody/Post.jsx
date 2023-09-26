@@ -6,7 +6,7 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 
-const Post = ({ name, description, message, photoUrl }) => {
+const Post = ({ name, description, message }) => {
   return (
     //Post
     <div className="bg-white p-4 mb-[10px] rounded-xl">
@@ -25,7 +25,7 @@ const Post = ({ name, description, message, photoUrl }) => {
       </div>
 
       {/* Post Buttons */}
-      <div className="flex"> 
+      <div className="flex justify-evenly"> 
         <InputOption Icon={ThumbUpAltOutlinedIcon} title='Like' color='gray'/>
         <InputOption Icon={ChatOutlinedIcon} title='Comment' color='gray'/>
         <InputOption Icon={ShareOutlinedIcon} title='Share' color='gray'/>

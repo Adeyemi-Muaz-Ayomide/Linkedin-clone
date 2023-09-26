@@ -15,7 +15,7 @@ const Header = () => {
       <div className="flex">
         <img
           className="object-contain h-10"
-          src="../../public/icons8-linkedin (1).svg"
+          src="/icons8-linkedin (1).svg"
           alt="picture of linkedin"
         />
 

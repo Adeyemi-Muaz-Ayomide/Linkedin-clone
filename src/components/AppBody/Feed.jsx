@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+import { getPosts, postPosts } from "../../api/FirestoreAPI";
+import { getCurrentTimeStamp } from "../../Helpers/useMoment";
 
 import Post from "./Post";
 import InputOption from "./InputOption";
@@ -10,11 +13,36 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
 
 const Feed = () => {
+  const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const sendPost = (e) => {
-    e.preventDefault()
-  }
+  // useEffect(() => {
+  //   getPosts()
+  // }, []);
+
+  useMemo(() => {
+    getPosts(setPosts);
+  }, []);
+
+  console.log(posts);
+
+  const sendPost = async (e) => {
+    e.preventDefault();
+
+    let posts = {
+      name: "Adeyemi muaz",
+      description: "this is a test",
+      message: input,
+      photoUrl: "",
+      timeStamp: getCurrentTimeStamp("LLL"),
+    };
+    await postPosts(posts);
+
+    // Update the posts state to include the new post
+    setPosts((prevPosts) => [posts, ...prevPosts]);
+
+    setInput("");
+  };
   return (
     //Feed
     <div className="flex-[0.6] my-0 mx-[20px]">
@@ -27,8 +55,10 @@ const Feed = () => {
             <input
               type="text"
               className="border-none flex-1 ml-[10px] font-semibold outline-0"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
-            <button type="submit" onClick={sendPost} className="hidden">
+            <button type="submit" onClick={sendPost}>
               Send
             </button>
           </form>
@@ -50,12 +80,30 @@ const Feed = () => {
         </div>
       </div>
 
-      {posts.map((post) => <Post key={post} /> )}
-      <Post
-        name="Adeyemi muaz"
-        description="This is a test"
-        message="WOW!! This worked"
-      />
+      {/* {posts.map({ name, description, photoUrl, message }) => (
+        <Post
+          key={id}
+          name={name}
+          description={description}
+          message={message}
+          photoUrl={photoUrl}
+        />
+      ))} */}
+
+      {posts.map(({ id, name, description, message, photoUrl }) => {
+        return (
+          <>
+            <Post
+              key={id}
+              name={name}
+              description={description}
+              message={message}
+              photoUrl={photoUrl}
+            />
+            ;
+          </>
+        );
+      })}
     </div>
   );
 };

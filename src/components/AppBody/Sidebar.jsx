@@ -11,7 +11,8 @@ const Sidebar = () => {
         <span className="mr-[10px] ml-[5px]">#</span>
         <p>{topic}</p>
       </div>
-    );};
+    );
+  };
   return (
     // Sidebar
     <div className="sticky top-20 flex-[0.2] rounded-xl text-center h-fit">
@@ -43,13 +44,12 @@ const Sidebar = () => {
       {/* Sidebar bottom  */}
       <div className="text-left p-[10px] bg-white border border-slate-200 rounded-lg mt-[10px]">
         <p className="text-sm pb-[10px]">Recent</p>
-        <p>
-          {recentItems("reactjs")}
-          {recentItems("programming")}
-          {recentItems("webdevelopment")}
-          {recentItems("softwareengineering")}
-          {recentItems("developer")}
-        </p>
+
+        {recentItems("reactjs")}
+        {recentItems("programming")}
+        {recentItems("webdevelopment")}
+        {recentItems("softwareengineering")}
+        {recentItems("developer")}
       </div>
     </div>
   );
