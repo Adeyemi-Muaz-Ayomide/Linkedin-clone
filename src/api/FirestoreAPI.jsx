@@ -3,8 +3,8 @@ import {
   addDoc,
   collection,
   onSnapshot,
-  //   query,
-  //   orderBy,
+    query,
+    orderBy,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -21,8 +21,8 @@ export const postPosts = (object) => {
 };
 
 export const getPosts = (setPosts) => {
-  //   const q = query(dbRef, orderBy("timeStamp"));
-  onSnapshot(dbRef, (response) => {
+    const q = query(dbRef, orderBy("timeStamp", 'desc'));
+  onSnapshot(q, (response) => {
     setPosts(
       response.docs.map((docs) => {
         return { ...docs.data(), id: docs.id };
