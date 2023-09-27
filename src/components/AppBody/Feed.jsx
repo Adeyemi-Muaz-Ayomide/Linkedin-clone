@@ -100,7 +100,6 @@ const Feed = () => {
               message={message}
               photoUrl={photoUrl}
             />
-            ;
           </>
         );
       })}

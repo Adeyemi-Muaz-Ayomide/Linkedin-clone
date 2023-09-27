@@ -30,15 +30,3 @@ export const getPosts = (setPosts) => {
     );
   });
 };
-
-// async function getPosts(db) {
-//   const postsCol = collection(db, "posts");
-//   const postsSnapshot = await getDocs(postsCol);
-//   setPosts(
-//     postsSnapshot.docs.map((doc) => ({
-//       id: doc.id, // 'id' is the document ID
-//       data: doc.data(), // 'data()' retrieves the document data
-//     }))
-//   );
-// }
-// getPosts();

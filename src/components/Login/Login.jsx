@@ -1,22 +1,66 @@
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/UserSlice";
+// import { login } from "../../features/UserSlice";
+// import { auth } from "../../../firebaseConfig";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profilePic, setProfilePic] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogin = (e) => {
     e.preventDefault();
   };
-  const handleRegister = () => {};
+  const handleRegister = async () => {
+    if (!name) {
+      alert("Please enter your full name");
+    }
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: profilePic,
+        }).then(() => {
+          dispatch(
+            login({
+              email: userCredential.user.email,
+              uid: userCredential.user.uid,
+              displayName: name,
+              photoURL: profilePic,
+            })
+          );
+        });
+      })
+      .catch((error) => {
+        alert(error);
+      });
+    //    auth.createUserWithEmailAndPassword(email, password).then((userAuth) => {
+    //     userAuth.user.updateProfile
+    //    })
+  };
 
   const inputStyle =
     "w-[350px] h-[50px] text-xl pl-[10px] mb-[10px] rounded-md";
 
   return (
-    <div className="grid place-items-center mx-auto py-[100px]">
-      <img className=" object-contain h-[70px] my-[20px]" src="" alt="" />
+    <div className="grid place-items-center mx-auto py-[80px]">
+      <img
+        className=" object-contain h-[70px] my-[20px] w-full bg-none"
+        src="/public/logo-tm.png"
+        alt=""
+      />
 
       <form className="flex flex-col">
         <input
@@ -55,7 +99,7 @@ const Login = () => {
           Sign In
         </button>
 
-        <p className="mt-[20px]">
+        <p className="mt-[20px] text-center">
           Not a member?{" "}
           <span
             onClick={handleRegister}
